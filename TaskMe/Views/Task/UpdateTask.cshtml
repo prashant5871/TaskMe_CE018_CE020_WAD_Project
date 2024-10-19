@@ -1,0 +1,56 @@
+﻿@model TaskMe.Models.Task
+
+@{
+    ViewBag.Title = "Update Task";
+}
+
+<link rel="stylesheet" href="~/css/home_index.css" />
+
+<h2>Update Task</h2>
+
+<form method="post" asp-action="UpdateTask">
+    <input type="hidden" name="Id" value="@Model.Id" />
+    <input type="text" name="Title" value="@Model.Title" required />
+    <textarea name="Description">@Model.Description</textarea>
+    <select name="Priority">
+    @if (Model.Priority == TaskPriority.Low)
+    {
+        <option value="1" selected>Low</option>
+    }
+    else
+    {
+        <option value="1">Low</option>
+    }
+
+    @if (Model.Priority == TaskPriority.Medium)
+    {
+        <option value="2" selected>Medium</option>
+    }
+    else
+    {
+        <option value="2">Medium</option>
+    }
+
+    @if (Model.Priority == TaskPriority.High)
+    {
+        <option value="3" selected>High</option>
+    }
+    else
+    {
+        <option value="3">High</option>
+    }
+
+    @if (Model.Priority == TaskPriority.Urgent)
+    {
+        <option value="4" selected>Urgent</option>
+    }
+    else
+    {
+        <option value="4">Urgent</option>
+    }
+</select>
+
+    <button type="submit">Update Task</button>
+</form>
+
+<a href="@Url.Action("Index", "Task")">Back to Task List</a>

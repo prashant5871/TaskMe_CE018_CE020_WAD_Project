@@ -1,0 +1,46 @@
+﻿@using Microsoft.AspNetCore.Http
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TaskMe</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-brand logo" href="@Url.Action("Index", "Home")">
+                Task<span>Me</span>
+            </a>
+            <div class="navbar-links">
+                <ul>
+                    @if (Context.Session.GetInt32("UserId") != null)
+                    {
+                        <li> <a href="@Url.Action("AddTask","Task")">Add Task</a> </li>
+
+                        <li> <a href="@Url.Action("Index","Task")">My Tasks</a> </li>
+                        <li><a href="@Url.Action("Logout", "Auth")">Logout</a></li>
+                        
+                    }
+                    else
+                    {
+                        <li><a href="@Url.Action("Login", "Auth")" class="login">Login</a></li>
+                        <li><a href="@Url.Action("Register", "Auth")" class="register">Register</a></li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        @RenderBody()
+    </div>
+
+    <footer>
+        <p>&copy; 2024 TaskMe. All rights reserved.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</body>
+</html>

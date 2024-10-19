@@ -1,0 +1,35 @@
+﻿@model TaskMe.Models.Task
+
+@{
+    ViewBag.Title = "Add New Task";
+}
+
+<link rel="stylesheet" href="~/css/add_task.css" />
+
+<h2>Add New Task</h2>
+
+<form method="post" asp-action="AddTask">
+    <label for="title">Task Title:</label>
+    <input type="text" id="title" name="Title" placeholder="Task Title" required />
+
+    <label for="description">Task Description:</label>
+    <textarea id="description" name="Description" placeholder="Task Description"></textarea>
+
+    <label for="dueDate">Due Date:</label>
+    <input type="date" id="dueDate" name="DueDate" required />
+
+    <label for="priority">Priority:</label>
+    <select id="priority" name="Priority">
+        <option value="1">Low</option>
+        <option value="2">Medium</option>
+        <option value="3">High</option>
+        <option value="4">Urgent</option>
+    </select>
+
+    <a href="@Url.Action("AddTask", "Task")" class="btn-add-task">Add New Task</a>
+
+
+    <button type="submit" class="btn btn-submit">Add Task</button>
+</form>
+
+<a href="@Url.Action("Index", "Task")" class="btn btn-back">Back to Task List</a>

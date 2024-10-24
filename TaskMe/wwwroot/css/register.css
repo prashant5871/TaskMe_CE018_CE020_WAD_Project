@@ -11,7 +11,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
 }
 
 /* Form container */
@@ -23,6 +22,7 @@ body {
     max-width: 400px;
     width: 100%;
     text-align: center;
+    margin-bottom:5rem;
 }
 
 .form-title {
@@ -101,6 +101,17 @@ body {
         .redirect-link a:hover {
             text-decoration: underline;
         }
+
+.error-message {
+    background-color: darkred;
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    border: 1px solid #f5c6cb;
+    text-align: center;
+    font-size: 14px;
+}
 
 /* Responsive adjustments */
 @media (max-width: 768px) {

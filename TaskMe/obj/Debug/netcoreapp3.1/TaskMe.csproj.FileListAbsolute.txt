@@ -127,3 +127,4 @@ D:\SEM-5\WAD\TermWork\Projects\TaskMe\TaskMe\obj\Debug\netcoreapp3.1\TaskMe.genr
 D:\SEM-5\WAD\TermWork\Projects\TaskMe\TaskMe\obj\Debug\netcoreapp3.1\Razor\Views\Task\AddTask.cshtml.g.cs
 D:\SEM-5\WAD\TermWork\Projects\TaskMe\TaskMe\obj\Debug\netcoreapp3.1\Razor\Views\Task\UpdateTask.cshtml.g.cs
 D:\SEM-5\WAD\TermWork\Projects\TaskMe\TaskMe\obj\Debug\netcoreapp3.1\Razor\Views\Task\Index.cshtml.g.cs
+D:\SEM-5\WAD\TermWork\Projects\TaskMe\TaskMe\obj\Debug\netcoreapp3.1\TaskMe.sourcelink.json

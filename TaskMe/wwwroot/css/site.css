@@ -7,7 +7,7 @@
 
 /* Body Padding to Prevent Overlap */
 body {
-    padding-top: 70px; /* Space for the fixed navbar */
+    padding-top: 70px;*/ /* Space for the fixed navbar */
     padding-bottom: 70px; /* Space for the fixed footer */
 }
 

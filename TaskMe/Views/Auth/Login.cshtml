@@ -5,10 +5,18 @@
     Layout = "~/Views/Shared/_Layout.cshtml"; // Use shared layout
 }
 
-<link rel="stylesheet" href="~/css/register.css" /> <!-- Link the shared CSS -->
+<link rel="stylesheet" href="~/css/register.css" /> <!-- Link the login CSS file -->
 
 <div class="form-container">
-    <h2 class="form-title">Login to TaskMe</h2>
+    <h2 class="form-title">Login</h2>
+
+    <!-- Display validation errors -->
+    @if (ViewData.ModelState[""] != null)
+    {
+        <div class="error-message">
+            @ViewData.ModelState[""].Errors[0].ErrorMessage
+        </div>
+    }
 
     <form asp-action="Login" method="post" class="custom-form">
         <div class="form-group">
@@ -25,6 +33,6 @@
     </form>
 
     <div class="redirect-link">
-        <p>Don't have an account? <a href="@Url.Action("Register", "Auth")">Sign up here</a></p>
+        <p>Don't have an account? <a href="@Url.Action("Register", "Auth")">Register here</a></p>
     </div>
 </div>

@@ -16,42 +16,50 @@ namespace TaskMe.Controllers
             _context = context;
         }
 
-    
-           
+
+
         public IActionResult Index(DateTime? startDate, DateTime? endDate, int? priority)
-            {
+        {
             var userId = HttpContext.Session.GetInt32("UserId");
             if (userId == null)
             {
                 return RedirectToAction("Login", "Auth");
             }
-            // Fetch all tasks
-            var tasks = _context.Tasks.AsQueryable();
 
-                // Apply filters
-                if (startDate.HasValue)
-                {
-                    tasks = tasks.Where(t => t.DueDate >= startDate.Value);
-                }
+            // Fetch all tasks for the user
+            var tasks = _context.Tasks.Where(t => t.UserId == userId).AsQueryable();
 
-                if (endDate.HasValue)
-                {
-                    tasks = tasks.Where(t => t.DueDate <= endDate.Value);
-                }
+            // Apply filters
+            if (startDate.HasValue)
+            {
+                tasks = tasks.Where(t => t.CreatedAt <= startDate.Value);
+            }
 
-                if (priority.HasValue)
-                {
-                    tasks = tasks.Where(t => t.Priority == (TaskPriority) priority.Value);
-                }
+            if (endDate.HasValue)
+            {
+                tasks = tasks.Where(t => t.DueDate <= endDate.Value);
+            }
 
-                // Return filtered tasks
-                return View(tasks.ToList());
+            if (priority.HasValue)
+            {
+                tasks = tasks.Where(t => t.Priority == (TaskPriority)priority.Value);
+            }
+
+            // Separate tasks into remaining and completed
+            var viewModel = new TaskViewModel
+            {
+                RemainingTasks = tasks.Where(t => !t.IsCompleted).ToList(),
+                CompletedTasks = tasks.Where(t => t.IsCompleted).ToList()
+            };
+
+            return View(viewModel);
         }
-        
+    
 
-        // GET: Add Task
-       
-        public IActionResult AddTask()
+
+    // GET: Add Task
+
+    public IActionResult AddTask()
         {
             var userId = HttpContext.Session.GetInt32("UserId");
             if (userId == null)
@@ -110,6 +118,26 @@ namespace TaskMe.Controllers
                 _context.SaveChanges();
             }
             return RedirectToAction("Index","Task");
+        }
+
+        [HttpPost]
+        public IActionResult MarkAsCompleted(int id)
+        {
+            var userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+
+            var task = _context.Tasks.Find(id);
+            if (task != null && task.UserId == userId.Value)
+            {
+                task.IsCompleted = true;
+                _context.Tasks.Update(task);
+                _context.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
         }
 
         // GET: Update Task

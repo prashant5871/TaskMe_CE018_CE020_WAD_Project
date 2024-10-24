@@ -49,9 +49,25 @@ namespace TaskMe.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Users.Add(model);
-                _context.SaveChanges();
-                return RedirectToAction("Login");
+                User existingUser = _context.Users.FirstOrDefault(user => user.Email == model.Email);
+                if (existingUser == null)
+                {
+                    _context.Users.Add(model);
+
+                    _context.SaveChanges();
+                    User u = _context.Users.FirstOrDefault(u => u.Email == model.Email);
+                    if (u != null)
+                    {
+                        HttpContext.Session.SetInt32("UserId", u.Id);
+                        return RedirectToAction("Index", "Home");
+                    }
+                    return RedirectToAction("Login");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "User with email Id already Exists.");
+                    return View(model);
+                }
             }
             return View(model);
         }

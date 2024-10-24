@@ -4,53 +4,71 @@
     ViewBag.Title = "Update Task";
 }
 
-<link rel="stylesheet" href="~/css/home_index.css" />
+<link rel="stylesheet" href="~/css/add_task.css" />
 
-<h2>Update Task</h2>
+<div class="task-update-body">
+    <h2>Update Task</h2>
 
-<form method="post" asp-action="UpdateTask">
-    <input type="hidden" name="Id" value="@Model.Id" />
-    <input type="text" name="Title" value="@Model.Title" required />
-    <textarea name="Description">@Model.Description</textarea>
-    <select name="Priority">
-    @if (Model.Priority == TaskPriority.Low)
-    {
-        <option value="1" selected>Low</option>
-    }
-    else
-    {
-        <option value="1">Low</option>
-    }
+    <form method="post" asp-action="UpdateTask">
+        <!-- Hidden field for Task Id -->
+        <input type="hidden" name="Id" value="@Model.Id" />
 
-    @if (Model.Priority == TaskPriority.Medium)
-    {
-        <option value="2" selected>Medium</option>
-    }
-    else
-    {
-        <option value="2">Medium</option>
-    }
+        <!-- Title Field -->
+        <label for="title">Task Title:</label>
+        <input type="text" id="title" name="Title" value="@Model.Title" placeholder="Enter task title" required />
 
-    @if (Model.Priority == TaskPriority.High)
-    {
-        <option value="3" selected>High</option>
-    }
-    else
-    {
-        <option value="3">High</option>
-    }
+        <!-- Description Field -->
+        <label for="description">Task Description:</label>
+        <textarea id="description" name="Description" placeholder="Enter task description">@Model.Description</textarea>
 
-    @if (Model.Priority == TaskPriority.Urgent)
-    {
-        <option value="4" selected>Urgent</option>
-    }
-    else
-    {
-        <option value="4">Urgent</option>
-    }
-</select>
+        <!-- Priority Field -->
+        <label for="priority">Priority:</label>
+        <select name="Priority">
+            @if (Model.Priority == TaskPriority.Low)
+            {
+                <option value="1" selected>Low</option>
+            }
+            else
+            {
+                <option value="1">Low</option>
+            }
 
-    <button type="submit">Update Task</button>
-</form>
+            @if (Model.Priority == TaskPriority.Medium)
+            {
+                <option value="2" selected>Medium</option>
+            }
+            else
+            {
+                <option value="2">Medium</option>
+            }
 
-<a href="@Url.Action("Index", "Task")">Back to Task List</a>
+            @if (Model.Priority == TaskPriority.High)
+            {
+                <option value="3" selected>High</option>
+            }
+            else
+            {
+                <option value="3">High</option>
+            }
+
+            @if (Model.Priority == TaskPriority.Urgent)
+            {
+                <option value="4" selected>Urgent</option>
+            }
+            else
+            {
+                <option value="4">Urgent</option>
+            }
+        </select>
+
+        <!-- Due Date Field -->
+        <label for="dueDate">Due Date:</label>
+        <input type="date" id="dueDate" name="DueDate" value="@Model.DueDate.ToString("yyyy-MM-dd")" min="@DateTime.Now.ToString("yyyy-MM-dd")" required />
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn-update-task">Update Task</button>
+    </form>
+
+    <!-- Back Button -->
+    <a href="@Url.Action("Index", "Task")" class="btn-back">Back to Task List</a>
+</div>

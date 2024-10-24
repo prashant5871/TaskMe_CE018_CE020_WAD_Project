@@ -6,6 +6,8 @@
 
 <link rel="stylesheet" href="~/css/add_task.css" />
 
+<div class="task_body">
+
 <h2>Add New Task</h2>
 
 <form method="post" asp-action="AddTask">
@@ -16,7 +18,7 @@
     <textarea id="description" name="Description" placeholder="Task Description"></textarea>
 
     <label for="dueDate">Due Date:</label>
-    <input type="date" id="dueDate" name="DueDate" required />
+        <input type="date" id="dueDate" name="DueDate" min="@DateTime.Now.ToString("yyyy-MM-dd")" required />
 
     <label for="priority">Priority:</label>
     <select id="priority" name="Priority">
@@ -26,10 +28,9 @@
         <option value="4">Urgent</option>
     </select>
 
-    <a href="@Url.Action("AddTask", "Task")" class="btn-add-task">Add New Task</a>
-
 
     <button type="submit" class="btn btn-submit">Add Task</button>
 </form>
 
-<a href="@Url.Action("Index", "Task")" class="btn btn-back">Back to Task List</a>
+    <a href="@Url.Action("Index", "Task")" class="btn btn-submit">Back to Task List</a>
+</div>

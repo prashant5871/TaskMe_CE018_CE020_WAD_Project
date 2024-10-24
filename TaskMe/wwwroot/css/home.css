@@ -10,20 +10,20 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f0f4f8;
     color: #333;
-    padding: 20px;
+
 }
 
 /* Container */
 .container {
     max-width: 800px;
-    margin: 0 auto;
+    margin : auto;
     padding: 20px;
 }
 
 /* Header styles */
 header {
     text-align: center;
-    padding: 40px 0;
+    padding:40px 0;
     background-color: #007bff;
     color: white;
     border-radius: 8px;
